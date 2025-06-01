@@ -1,4 +1,4 @@
-# [your_project_name]
-group [your group number here]
+# **Text Search App**
 
-group members: [list group members here]
+**Group 6**  
+**Group Members:** Marco Weber, Agnessa Fomina, Jue Hang, Ruonan Mi
