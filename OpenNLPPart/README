@@ -1,7 +1,7 @@
 So, my OpenNLP part is kinda done, but for now it is not perfect at all and not connected with the GUI, there is the demo version of it (i made my own GUI right there)
 
 Instruction:
-- clone this repository
+- clone this folder
 - add plugins to the folder "External Libraries" (see below)
 - run NLPGuiAPP.java
 - insert the URL for your web-page
