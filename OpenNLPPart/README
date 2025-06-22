@@ -12,4 +12,4 @@ Instruction:
 - then you can search whatever you want with the "search type" and "query"
 - now you can see search results
 
-"opennlp-tools-2.5.4.jar" and "opennlp-tools-models-2.5.4.jar" should be added in External Libraries 
+"opennlp-tools-2.5.4.jar" and "opennlp-tools-models-2.5.4.jar" should be added to the External Libraries 
