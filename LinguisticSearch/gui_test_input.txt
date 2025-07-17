@@ -1,0 +1,5 @@
+
+Language is a structured system of communication.
+This system includes syntax, semantics, phonology, and morphology.
+Computational linguistics involves syntax parsing and semantic understanding.
+This file is for GUI testing purposes.
