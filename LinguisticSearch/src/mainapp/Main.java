@@ -1,12 +1,14 @@
 package mainapp;
 
 
+import group6.java.ui.MainFrame;
+
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            ui.MainFrame mainFrame = new ui.MainFrame();
+            MainFrame mainFrame = new MainFrame();
             mainFrame.setVisible(true);
         });
     }
