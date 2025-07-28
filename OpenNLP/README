@@ -1,5 +1,0 @@
-You should add in External Libraries "opennlp-tools-2.5.4.jar" and "opennlp-tools-models-2.5.4.jar"
-Main.java - just a demo without a window and only with input text
-NLPGuiApp.java - also a demo version with the minimal GUI
-
-
