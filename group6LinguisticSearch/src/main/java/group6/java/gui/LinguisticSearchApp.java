@@ -2,7 +2,7 @@ package group6.java.gui;
 import group6.java.model.LinguisticToken;
 import group6.java.model.SearchResult;
 import group6.java.model.SearchHistoryEntry;
-import group6.java.nlp.OpenNLPProcessor;
+import group6.java.nlp.GermanMWEProcessor;
 import group6.java.scraper.InputHandler;
 import group6.java.xml.XMLExporter;
 import javax.swing.*;
@@ -21,7 +21,7 @@ import java.util.List;
  * Main GUI application for linguistic search
  */
 public class LinguisticSearchApp extends JFrame {
-    private OpenNLPProcessor nlpProcessor;
+    private GermanMWEProcessor nlpProcessor;
     private List<LinguisticToken> currentTokens;
     private String currentSource;
     private String currentText;
@@ -50,13 +50,13 @@ public class LinguisticSearchApp extends JFrame {
 
     public LinguisticSearchApp() {
         try {
-            nlpProcessor = new OpenNLPProcessor();
+            nlpProcessor = new GermanMWEProcessor();
             highlightPainter = new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW);
             searchHistory = new ArrayList<>();
             initializeGUI();
             } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
-                    "Error initializing OpenNLP: " + e.getMessage(),
+                    "Error initializing German MWE Processor: " + e.getMessage(),
                     "Initialization Error",
                     JOptionPane.ERROR_MESSAGE);
             System.exit(1);
@@ -132,7 +132,7 @@ public class LinguisticSearchApp extends JFrame {
         JPanel panel = new JPanel(new BorderLayout());
 
         // Initialize the table model
-        String[] columnNames = {"Word", "Lemma", "POS Tag", "Sentence Context"};
+        String[] columnNames = {"Word", "MWE Type", "MWE Label", "MWE Full Form", "Sentence Context"};
         tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -225,7 +225,7 @@ public class LinguisticSearchApp extends JFrame {
         // ComboBox: searchTypeCombo
         gbc.gridx = 3;
         gbc.weightx = 0;
-        searchTypeCombo = new JComboBox<>(new String[]{"Word", "Lemma", "POS Tag"});
+        searchTypeCombo = new JComboBox<>(new String[]{"Word", "MWE Type", "MWE Label", "MWE Full Form"});
         //searchTypeCombo.setMinimumSize(new Dimension(90, 25));
         inputPanel.add(searchTypeCombo, gbc);
 
@@ -444,7 +444,7 @@ public class LinguisticSearchApp extends JFrame {
                              throw new Exception("No text could be extracted from the source.");
                         }
 
-                        // Process with OpenNLP
+                        // Process with German MWE detector
                         currentTokens = nlpProcessor.processText(currentText);
                   } catch (Exception e) {
                       throw e;
@@ -465,8 +465,9 @@ public class LinguisticSearchApp extends JFrame {
 
                                 Object[] row = {
                                         token.getWord(),
-                                        token.getLemma(),
-                                        token.getPosTag(),
+                                        token.getMweType(),
+                                        token.getMweLabel(),
+                                        token.getMweFullForm(),
                                         token.getSentence()
                                 };
 
@@ -510,11 +511,14 @@ public class LinguisticSearchApp extends JFrame {
                 case "Word":
                     results = nlpProcessor.searchByWord(currentTokens, searchTerm);
                     break;
-                case "Lemma":
-                    results = nlpProcessor.searchByLemma(currentTokens, searchTerm);
+                case "MWE Type":
+                    results = nlpProcessor.searchByMWEType(currentTokens, searchTerm);
                     break;
-                case "POS Tag":
-                    results = nlpProcessor.searchByPOS(currentTokens, searchTerm);
+                case "MWE Label":
+                    results = nlpProcessor.searchByMWELabel(currentTokens, searchTerm);
+                    break;
+                case "MWE Full Form":
+                    results = nlpProcessor.searchByMWEFullForm(currentTokens, searchTerm);
                     break;
                 default:
                     results = nlpProcessor.searchByWord(currentTokens, searchTerm);
@@ -526,8 +530,9 @@ public class LinguisticSearchApp extends JFrame {
 
                 Object[] row = {
                         token.getWord(),
-                        token.getLemma(),
-                        token.getPosTag(),
+                        token.getMweType(),
+                        token.getMweLabel(),
+                        token.getMweFullForm(),
                         token.getSentence()
                 };
                 tableModel.addRow(row);
@@ -590,11 +595,14 @@ public class LinguisticSearchApp extends JFrame {
                 case "word":
                     results = nlpProcessor.searchByWord(currentTokens, searchTerm);
                     break;
-                case "lemma":
-                    results = nlpProcessor.searchByLemma(currentTokens, searchTerm);
+                case "mwe type":
+                    results = nlpProcessor.searchByMWEType(currentTokens, searchTerm);
                     break;
-                case "pos tag":
-                    results = nlpProcessor.searchByPOS(currentTokens, searchTerm);
+                case "mwe label":
+                    results = nlpProcessor.searchByMWELabel(currentTokens, searchTerm);
+                    break;
+                case "mwe full form":
+                    results = nlpProcessor.searchByMWEFullForm(currentTokens, searchTerm);
                     break;
                 default:
                     results = nlpProcessor.searchByWord(currentTokens, searchTerm);

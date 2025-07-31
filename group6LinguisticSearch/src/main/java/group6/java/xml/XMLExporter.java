@@ -50,8 +50,11 @@ public class XMLExporter {
             tokenElement.setAttribute("sentence-index", String.valueOf(token.getSentenceIndex()));
             tokenElement.setAttribute("token-index", String.valueOf(token.getTokenIndex()));
             tokenElement.addContent(new Element("word").setText(token.getWord()));
-            tokenElement.addContent(new Element("lemma").setText(token.getLemma()));
-            tokenElement.addContent(new Element("pos-tag").setText(token.getPosTag()));
+            tokenElement.addContent(new Element("mwe-type").setText(token.getMweType()));
+            tokenElement.addContent(new Element("mwe-label").setText(token.getMweLabel()));
+            tokenElement.addContent(new Element("mwe-full-form").setText(token.getMweFullForm() != null ? token.getMweFullForm() : ""));
+            tokenElement.addContent(new Element("mwe-start").setText(String.valueOf(token.isMweStart())));
+            tokenElement.addContent(new Element("mwe-end").setText(String.valueOf(token.isMweEnd())));
             tokenElement.addContent(new Element("sentence").setText(token.getSentence()));
             tokensElement.addContent(tokenElement);
         }
@@ -87,8 +90,9 @@ public class XMLExporter {
             matchElement.setAttribute("sentence-index", String.valueOf(token.getSentenceIndex()));
             matchElement.setAttribute("token-index", String.valueOf(token.getTokenIndex()));
             matchElement.addContent(new Element("word").setText(token.getWord()));
-            matchElement.addContent(new Element("lemma").setText(token.getLemma()));
-            matchElement.addContent(new Element("pos-tag").setText(token.getPosTag()));
+            matchElement.addContent(new Element("mwe-type").setText(token.getMweType()));
+            matchElement.addContent(new Element("mwe-label").setText(token.getMweLabel()));
+            matchElement.addContent(new Element("mwe-full-form").setText(token.getMweFullForm() != null ? token.getMweFullForm() : ""));
             matchElement.addContent(new Element("sentence").setText(token.getSentence()));
             matchesElement.addContent(matchElement);
         }
@@ -139,12 +143,14 @@ public class XMLExporter {
 
         // Count searches by type
         long wordSearches = searchHistory.stream().filter(e -> "Word".equals(e.getSearchType())).count();
-        long lemmaSearches = searchHistory.stream().filter(e -> "Lemma".equals(e.getSearchType())).count();
-        long posSearches = searchHistory.stream().filter(e -> "POS Tag".equals(e.getSearchType())).count();
+        long mweTypeSearches = searchHistory.stream().filter(e -> "MWE Type".equals(e.getSearchType())).count();
+        long mweLabelSearches = searchHistory.stream().filter(e -> "MWE Label".equals(e.getSearchType())).count();
+        long mweFullFormSearches = searchHistory.stream().filter(e -> "MWE Full Form".equals(e.getSearchType())).count();
 
         statistics.addContent(new Element("word-searches").setText(String.valueOf(wordSearches)));
-        statistics.addContent(new Element("lemma-searches").setText(String.valueOf(lemmaSearches)));
-        statistics.addContent(new Element("pos-searches").setText(String.valueOf(posSearches)));
+        statistics.addContent(new Element("mwe-type-searches").setText(String.valueOf(mweTypeSearches)));
+        statistics.addContent(new Element("mwe-label-searches").setText(String.valueOf(mweLabelSearches)));
+        statistics.addContent(new Element("mwe-full-form-searches").setText(String.valueOf(mweFullFormSearches)));
 
         // Total matches found
         int totalMatches = searchHistory.stream().mapToInt(SearchHistoryEntry::getResultCount).sum();
