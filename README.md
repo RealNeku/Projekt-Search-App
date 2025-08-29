@@ -32,4 +32,4 @@ The system successfully extracts German MWEs with high accuracy:
 
 For detailed documentation, see: `GERMAN_MWE_EXTRACTOR_README.md`
 
-Group 6 members: Marco Weber, Agnessa Fomina, Jue Huang, Ruonan Mi
+Group members: Marco Weber
