@@ -1,0 +1,54 @@
+German Multiword Expression Extraction Results
+Generated: 2025-08-29T14:25:26.685027
+Total MWEs: 7
+===================================================
+
+COMPOUND_NOUN (1 expressions)
+-----------------------------------------
+  Entscheidung                   (conf: 0,80)
+    Lemma: entscheidung
+    Source: Sample Text
+
+
+PHRASAL_VERB (2 expressions)
+-----------------------------------------
+  zu eine                        (conf: 0,75)
+    Source: Sample Text
+
+  um die                         (conf: 0,75)
+    Source: Sample Text
+
+
+PREPOSITIONAL_PHRASE (1 expressions)
+-----------------------------------------
+  Im Gegensatz zu                (conf: 0,90)
+    Lemma: im gegensatz zu
+    Source: Sample Text
+
+
+COLLOCATION (3 expressions)
+-----------------------------------------
+  schwere Entscheidung           (conf: 0,90)
+    Lemma: schwere entscheidung
+    Source: Sample Text
+
+  Der Ministerpräsident und      (conf: 0,65)
+    Lemma: der ministerpräsident und
+    Source: Sample Text
+
+  Ministerpräsident und          (conf: 0,60)
+    Lemma: ministerpräsident und
+    Source: Sample Text
+
+
+
+STATISTICS
+=====================
+Average confidence: 0,764
+Average length: 2,1
+Most common type: COLLOCATION
+
+Length distribution:
+  1 words: 1 MWEs
+  2 words: 4 MWEs
+  3 words: 2 MWEs
